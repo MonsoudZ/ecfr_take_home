@@ -1,0 +1,26 @@
+<div class="recently-amended">
+  <h1>Recently Amended eCFR Titles</h1>
+  <p>Titles amended within the last <%= @days %> days</p>
+  
+  <%= link_to "← Back to All Titles", ecfr_titles_path, class: "back-link" %>
+
+  <% if @titles.any? %>
+    <div class="amended-titles">
+      <% @titles.each do |title| %>
+        <div class="amended-title-card">
+          <div class="title-info">
+            <h3><%= link_to "Title #{title.number}: #{title.name}", ecfr_title_path(title) %></h3>
+            <p class="amendment-date">Amended on <%= title.latest_amended_on.strftime("%B %d, %Y") %></p>
+          </div>
+          <div class="days-ago">
+            <%= pluralize((Date.current - title.latest_amended_on).to_i, 'day') %> ago
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="no-results">
+      <p>No titles have been amended in the last <%= @days %> days.</p>
+    </div>
+  <% end %>
+</div>

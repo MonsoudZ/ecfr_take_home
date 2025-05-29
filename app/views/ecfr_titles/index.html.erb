@@ -1,0 +1,28 @@
+<div class="ecfr-titles-index">
+  <div class="header-section">
+    <h1>Electronic Code of Federal Regulations (eCFR) Titles</h1>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <h3><%= EcfrTitle.count %></h3>
+      <p>Total Titles</p>
+    </div>
+    <div class="stat-card">
+      <h3><%= EcfrTitle.active.count %></h3>
+      <p>Active Titles</p>
+    </div>
+    <div class="stat-card">
+      <h3><%= EcfrTitle.recently_amended(30).count %></h3>
+      <p>Amended (30 days)</p>
+    </div>
+  </div>
+
+  <div class="titles-grid">
+    <% @titles.each do |title| %>
+      <div class="title-card">
+        <h3><%= link_to "Title #{title.number}: #{title.name}", ecfr_title_path(title) %></h3>
+      </div>
+    <% end %>
+  </div>
+</div>
